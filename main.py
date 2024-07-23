@@ -1,13 +1,14 @@
 from utils import *
 from character import Character
 from story_0_intro import story_intro
+import os # not sure if will be used, mqybe remove later
     
 
 def read_char_sheet(char_sheet):
     '''Read the data from the character sheet for later use (name, abilities, skills...)'''
-    # Access the dictionary with the character's data
+    # access the dictionary with the character's data
     char_dictionary = char_sheet[0]
-    # Unpack the dictionary to get all the character's data
+    # unpack the dictionary to get all the character's data
     name = char_dictionary['name']
     hp = char_dictionary['hp']
     ac = char_dictionary['ac']
@@ -18,7 +19,7 @@ def read_char_sheet(char_sheet):
     weapon = char_dictionary['equipment'][0]['weapons'][0]
     armor = char_dictionary['equipment'][0]['armor'][0]
     
-    # Return the character's data as a tuple
+    # return the character's data as a tuple
     return name, ac, hp, abilities, abilities_bonuses, save_bonuses, skills, weapon, armor
 
     
