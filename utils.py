@@ -1,3 +1,4 @@
+from colorama import Fore, Style
 import json
 import sys
 import time
