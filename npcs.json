@@ -1,0 +1,39 @@
+{
+    "npcs": [
+        {
+        "id": "goblin",
+        "name": "Goblin",
+            "ac": 15,
+            "hp": 7,
+            "abilities_and_bonuses": {
+                "proficiency": 2,
+                "abilities": {
+                    "str": 8,
+                    "dex": 14,
+                    "con": 10,
+                    "int": 10,
+                    "wis": 8,
+                    "cha": 8
+                },
+                "abilities_bonuses": {
+                    "str": -1,
+                    "dex": 2,
+                    "con": 10,
+                    "int": 10,
+                    "wis": -1,
+                    "cha": -1
+                }
+
+            },
+            "skills": {
+                "stealth": 6,
+            "pp": 9,
+            "xp": 50,
+            "attacks": {
+                "scimitar": [4, 5],
+                "short_bow": [4, 5]
+                }
+            }    
+        }
+    ]
+}

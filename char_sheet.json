@@ -7,6 +7,7 @@
         "hp": 14,
         "hit_dice": "1d12",
         "abilities_and_bonuses": {
+            "proficiency": 2,
             "abilities": {
                 "str": 15,
                 "dex": 13,
