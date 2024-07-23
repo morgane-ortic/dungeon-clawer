@@ -1,0 +1,18 @@
+import json
+import sys
+import time
+
+slow_text_delay = 0.15
+
+def read_json_file(file_path):
+    '''Read the data from a json file'''
+    with open(file_path, 'r') as file:
+        return json.load(file)
+    
+def prints(text, delay=0.05):
+    '''Print text with a typewriter effect'''
+    for char in text:
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        time.sleep(delay)
+    print()  # Move to the next line after printing the text
