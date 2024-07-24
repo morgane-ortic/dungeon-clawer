@@ -1,9 +1,9 @@
 from utils import *
-from character import Character
+from characters import Character
 from story_0_intro import story_intro
-import os # not sure if will be used, mqybe remove later
+import os # not sure if will be used, maybe remove later
 
-    
+
 def main():
     # read the character sheet from the json file
     char_sheet = read_json_file('char_sheet.json')
