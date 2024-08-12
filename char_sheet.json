@@ -1,72 +1,66 @@
 [
-    {
-        "name": "Karlach",
-        "ac": 13,
-        "initiative": 1,
-        "speed": 9,
-        "hp": 14,
-        "hit_dice": "1d12",
-        "abilities_and_bonuses": {
-            "proficiency": 2,
-            "abilities": {
-                "str": 15,
-                "dex": 13,
-                "con": 14,
-                "int": 9,
-                "wis": 12,
-                "cha": 12
-            },
-            "abilities_bonuses": {
-                "str": 2,
-                "dex": 1,
-                "con": 2,
-                "int": -1,
-                "wis": 1,
-                "cha": 1
-            },
-            "save_bonuses": {
-                "str": 4,
-                "dex": 1,
-                "con": 4,
-                "int": -1,
-                "wis": 1,
-                "cha": 1
-            }
-        },
-        "skills": {
-            "acrobatics": 1,
-            "animal_handling": 3,
-            "arcana": 1,
-            "athletics": 4,
-            "deception": 1,
-            "history": -1,
-            "insight": 1,
-            "intimidation": 3,
-            "investigation": -1,
-            "medicine": 1,
-            "nature": 1,
-            "perception": 3,
-            "performance": 1,
-            "persuasion": 1,
-            "religion": -1,
-            "sleight_of_hand": 1,
-            "stealth": 1,
-            "survival": 1
-        },
-        "pp": 13,
-        "equipment": [
-            {
-                "weapons": [
-                    "Greataxe",
-                    "Javelin",
-                    "Javelin",
-                    "Javelin",
-                    "Javelin"
-                ],
-                "armor": [
-                    "Studded_Leather"
-                ]
-            }
-        ]
-    }
+  {
+    "name": "Karlach",
+    "char_class": "Barbarian",
+    "species": "Tiefling",
+    "ac": 13,
+    "initiative": 1,
+    "speed": 9,
+    "hp": 14,
+    "hit_dice": "1d12",
+    "abilities_and_bonuses": {
+      "proficiency": 2,
+      "abilities": {
+        "str": 15,
+        "dex": 13,
+        "con": 14,
+        "int": 9,
+        "wis": 12,
+        "cha": 12
+      },
+      "abilities_bonuses": {
+        "str": 2,
+        "dex": 1,
+        "con": 2,
+        "int": -1,
+        "wis": 1,
+        "cha": 1
+      },
+      "save_bonuses": {
+        "str": 4,
+        "dex": 1,
+        "con": 4,
+        "int": -1,
+        "wis": 1,
+        "cha": 1
+      }
+    },
+    "skills": {
+      "acrobatics": 1,
+      "animal_handling": 3,
+      "arcana": 1,
+      "athletics": 4,
+      "deception": 1,
+      "history": -1,
+      "insight": 1,
+      "intimidation": 3,
+      "investigation": -1,
+      "medicine": 1,
+      "nature": 1,
+      "perception": 3,
+      "performance": 1,
+      "persuasion": 1,
+      "religion": -1,
+      "sleight_of_hand": 1,
+      "stealth": 1,
+      "survival": 1
+    },
+    "pp": 13,
+    "equipment": [
+      {
+        "weapons": ["Greataxe", "Javelin", "Javelin", "Javelin", "Javelin"],
+        "armor": ["Studded_Leather"]
+      }
+    ]
+  }
 ]

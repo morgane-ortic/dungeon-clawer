@@ -1,5 +1,6 @@
 from colorama import Fore, Style
 import json
+import os
 import sys
 import time
 
@@ -17,3 +18,10 @@ def prints(text, delay=0.05):
         sys.stdout.flush()
         time.sleep(delay)
     print()  # Move to the next line after printing the text
+
+def wrong_choice():
+    '''Default message when a wrong choice in inputed by player'''
+    prints(Fore.RED + 'WRONG ANSWER! Please enter a valid choice:\n' + Style.RESET_ALL, slow_text_delay)
+
+def clear():
+    os.system('cls||clear')
