@@ -1,9 +1,10 @@
 from utils import *
-from characters import PC, NPC, Character
+from characters import PC, NPC
 from story_0_intro import story_intro
 
 
 def main():
+    clear()
     # instantiate the PC with the proper character sheet file as argument
     pc = PC('char_sheet.json')
     goblin = NPC('npcs.json')

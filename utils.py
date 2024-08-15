@@ -2,7 +2,7 @@ from colorama import Fore, Style
 import json
 import os
 import sys
-import time
+from time import sleep
 
 slow_text_delay = 0.15
 
@@ -16,7 +16,7 @@ def prints(text, delay=0.05):
     for char in text:
         sys.stdout.write(char)
         sys.stdout.flush()
-        time.sleep(delay)
+        sleep(delay)
     print()  # Move to the next line after printing the text
 
 def wrong_choice():
