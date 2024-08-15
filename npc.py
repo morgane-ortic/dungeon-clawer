@@ -1,4 +1,4 @@
-from utils import Fore, Style
+from colorama import Fore, Style
 from character import Character
 
 class NPC(Character):
