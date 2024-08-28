@@ -1,6 +1,5 @@
 from utils import *
-from npc import NPC
-from pc import PC
+from character import PC, NPC
 from story_0_intro import story_intro
 
 
