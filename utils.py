@@ -1,3 +1,5 @@
+# namedtuple will easy up recovering the dice results
+from collections import namedtuple
 from colorama import Fore, Style
 import json
 import os
@@ -20,6 +22,9 @@ def prints(text, delay=0.05):
         sleep(delay)
     print()  # Move to the next line after printing the text
 
+def printy(text, color=Fore.YELLOW):
+    print(color + text + Style.RESET_ALL)
+
 def wrong_choice():
     '''Default message when a wrong choice in inputed by player'''
     prints(Fore.RED + 'INVALID CHOICE! Please enter a valid choice:\n' + Style.RESET_ALL, slow_text_delay)
@@ -27,7 +32,9 @@ def wrong_choice():
 def clear():
     os.system('cls||clear')
 
+Result = namedtuple('Result', ['base_result', 'result'])
+
 def roll_dice(faces=20, bonus=0):
-    roll_result = randint(1, faces)
-    result = roll_result + bonus
-    return roll_result, result
+    base_result = randint(1, faces)
+    result = base_result + bonus
+    return Result(base_result, result)

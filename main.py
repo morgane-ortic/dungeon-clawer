@@ -33,6 +33,8 @@ def main():
             print(pc.atk_bonus)
             print(pc.dmg_dice)
             print(pc.dmg_bonus)
+        elif menu_choice == '4':
+            pc.calc_initiative()
         else:
             wrong_choice
     

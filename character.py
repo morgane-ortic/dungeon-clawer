@@ -1,6 +1,6 @@
-from colorama import Fore, Style
-from utils import read_json_file, roll_dice
 import re
+from colorama import Fore, Style
+from utils import prints, printy, read_json_file, roll_dice, sleep
 
 class Character:
     '''Character class to store the character's data'''
@@ -23,8 +23,23 @@ class Character:
         self.hp = self.char_dictionary['hp']
         self.ac = self.char_dictionary['ac']
         self.proficiency = self.char_dictionary['abilities_and_bonuses']['proficiency']
+
         self.abilities = self.char_dictionary['abilities_and_bonuses']['abilities']
-        self.abilities_bonuses = self.char_dictionary['abilities_and_bonuses']['abilities_bonuses']
+        self.strength = self.abilities['strength']
+        self.dexterity = self.abilities['dexterity']
+        self.constitution = self.abilities['constitution']
+        self.intelligence = self.abilities['intelligence']
+        self.wisdom = self.abilities['wisdom']
+        self.charisma = self.abilities_bonuses['charisma']
+
+        self.abilities_bonuses = self.chsar_dictionary['abilities_and_bonuses']['abilities_bonuses']
+        self.str_bns= self.abilities_bonuses['strength']
+        self.dex_bns = self.abilities_bonuses['dexterity']
+        self.con_bns = self.abilities_bonuses['constitution']
+        self.int_bns = self.abilities_bonuses['intelligence']
+        self.wis_bns = self.abilities_bonuses['wisdom']
+        self.cha_bns = self.abilities_bonuses['charisma']
+
         self.skills = self.char_dictionary['skills']
         self.pp = self.char_dictionary['pp']
 
@@ -36,6 +51,13 @@ class Character:
         If later the formatted strings are needed in more places: create variables to store them
         Maybe move this method to utils.py if it's used in more files'''
         return re.sub(r'_+', ' ', s).title()
+
+    def calc_initiative(self):
+        input('Roll for Initiative [ENTER]:')
+        sleep(1)
+        roll = roll_dice(20, self.initiative)
+        prints('......')
+        printy(f'You rolled {roll.base_result} + {self.initiative} = {roll.result}')
 
     def attack(self, target):
         '''attack action'''
@@ -73,7 +95,15 @@ class PC(Character):
         # unpack the dictionary to get the additional PC data
         self.char_class = self.char_dictionary['char_class']
         self.species = self.char_dictionary['species']
+
         self.save_bonuses = self.char_dictionary['abilities_and_bonuses']['save_bonuses']
+        self.str_sv_bns= self.save_bonuses['strength']
+        self.dex_sv_bns = self.save_bonuses['dexterity']
+        self.con_sv_bns = self.save_bonuses['constitution']
+        self.int_sv_bns = self.save_bonuses['intelligence']
+        self.wis_sv_bns = self.save_bonuses['wisdom']
+        self.cha_sv_bns = self.save_bonuses['charisma']
+
         # Now get all the equipment stats
         # Fetch the first key-value pair from the weapons dictionary
         eq_weapon_pair = next(iter(self.char_dictionary['equipment'][0]['weapons'].items()))
