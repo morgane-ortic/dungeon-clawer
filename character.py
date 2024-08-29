@@ -36,6 +36,19 @@ class Character:
         If later the formatted strings are needed in more places: create variables to store them
         Maybe move this method to utils.py if it's used in more files'''
         return re.sub(r'_+', ' ', s).title()
+
+    def attack(self, target):
+        '''attack action'''
+        print(f"{self.name} attacks {target.name}")
+        target.defend(self)
+
+    def take_damage(self, damage):
+        '''calculate lost hp from attack'''
+        self.health -= damage
+        if self.health <= 0:
+            print(f"{self.name} has been defeated!")
+        else:
+            print(f"{self.name} takes {damage} damage and has {self.health} health remaining")
     
 
 
@@ -98,6 +111,11 @@ class PC(Character):
         print(f'Armor equipped: {self.format_string(self.eq_armor)}\n')
 
 
+    def attack(self, target):
+        print(f"{self.name} attacks {target.name}")
+        target.defend(self)
+
+
 
 class NPC(Character):
     '''NPC subclass for getting and using NPCs characteristics'''
@@ -154,3 +172,8 @@ class NPC(Character):
         print(f'\nAttacks:')
         print(f'    {attacks_list}')
         print('\n========================================================================')
+
+
+    def attack(self, target):
+        print(f"{self.name} attacks {target.name}")
+        target.defend(self)
