@@ -1,5 +1,5 @@
 from colorama import Fore, Style
-from utils import read_json_file
+from utils import read_json_file, roll_dice
 import re
 
 class Character:
@@ -39,8 +39,10 @@ class Character:
 
     def attack(self, target):
         '''attack action'''
+        # calculate damage
+        damage = (int)
         print(f"{self.name} attacks {target.name}")
-        target.defend(self)
+        target.defend(self, damage)
 
     def take_damage(self, damage):
         '''calculate lost hp from attack'''
@@ -72,8 +74,18 @@ class PC(Character):
         self.char_class = self.char_dictionary['char_class']
         self.species = self.char_dictionary['species']
         self.save_bonuses = self.char_dictionary['abilities_and_bonuses']['save_bonuses']
-        self.eq_weapon = self.char_dictionary['equipment'][0]['weapons'][0]
-        self.eq_armor = self.char_dictionary['equipment'][0]['armor'][0]
+        # Now get all the equipment stats
+        # Fetch the first key-value pair from the weapons dictionary
+        eq_weapon_pair = next(iter(self.char_dictionary['equipment'][0]['weapons'].items()))
+        # Assign the key (name) and value (stats) to separate variables
+        self.eq_weapon, self.eq_weapon_stats = eq_weapon_pair
+        self.atk_range = self.eq_weapon_stats[0]
+        self.atk_bonus = self.abilities_bonuses[self.eq_weapon_stats[1]] + self.proficiency
+        self.dmg_dice = self.eq_weapon_stats[2]
+        self.dmg_bonus = self.eq_weapon_stats[3]
+        eq_armor_pair = next(iter(self.char_dictionary['equipment'][0]['armor'].items()))
+        self.eq_armor, self.eq_armor_stats = eq_armor_pair
+        self.attack = ""
 
 
     def print_char_sheet(self, abilities_bonus_values=[]):
@@ -90,7 +102,7 @@ class PC(Character):
         print(f'Species: {self.format_string(self.species)}')
         print(f'\nArmor Class: {self.ac}')
         print(f'Hit Points: {self.hp}')
-        print(f'Proficiency: {self.pp}')
+        print(f'Proficiency: {self.proficiency}')
         print ('\nAbilities:')
         # Print every ability + value + associated bonus from our abilities_bonus_values list
         for ability, value in self.abilities.items():

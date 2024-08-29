@@ -22,7 +22,7 @@ def prints(text, delay=0.05):
 
 def wrong_choice():
     '''Default message when a wrong choice in inputed by player'''
-    prints(Fore.RED + 'WRONG ANSWER! Please enter a valid choice:\n' + Style.RESET_ALL, slow_text_delay)
+    prints(Fore.RED + 'INVALID CHOICE! Please enter a valid choice:\n' + Style.RESET_ALL, slow_text_delay)
 
 def clear():
     os.system('cls||clear')

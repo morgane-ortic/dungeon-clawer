@@ -8,7 +8,7 @@ def main():
     # instantiate the PC with the proper character sheet file as argument
     pc = PC('char_sheet.json')
     goblin = NPC('npcs.json')
-    story_intro()
+    # story_intro()
 
     # clear the terminal after each part/sub-part
     clear()
@@ -26,6 +26,13 @@ def main():
             clear()
             # print the enemy's sheet
             goblin.print_char_sheet()
+        elif menu_choice == '3':
+            clear()
+            print(pc.eq_weapon)
+            print(pc.atk_range)
+            print(pc.atk_bonus)
+            print(pc.dmg_dice)
+            print(pc.dmg_bonus)
         else:
             wrong_choice
     

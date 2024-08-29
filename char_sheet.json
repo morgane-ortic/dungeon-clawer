@@ -11,28 +11,28 @@
     "abilities_and_bonuses": {
       "proficiency": 2,
       "abilities": {
-        "str": 15,
-        "dex": 13,
-        "con": 14,
-        "int": 9,
-        "wis": 12,
-        "cha": 12
+        "strength": 15,
+        "dexterity": 13,
+        "constitution": 14,
+        "intelligence": 9,
+        "wisdom": 12,
+        "charisma": 12
       },
       "abilities_bonuses": {
-        "str": 2,
-        "dex": 1,
-        "con": 2,
-        "int": -1,
-        "wis": 1,
-        "cha": 1
+        "strength": 2,
+        "dexterity": 1,
+        "constitution": 2,
+        "intelligence": -1,
+        "wisdom": 1,
+        "charisma": 1
       },
       "save_bonuses": {
-        "str": 4,
-        "dex": 1,
-        "con": 4,
-        "int": -1,
-        "wis": 1,
-        "cha": 1
+        "strength": 4,
+        "dexterity": 1,
+        "constitution": 4,
+        "intelligence": -1,
+        "wisdom": 1,
+        "charisma": 1
       }
     },
     "skills": {
@@ -58,8 +58,11 @@
     "pp": 13,
     "equipment": [
       {
-        "weapons": ["Greataxe", "Javelin", "Javelin", "Javelin", "Javelin"],
-        "armor": ["Studded_Leather"]
+        "weapons": {
+          "Greataxe": [5, "strength", [12], 3],
+          "Javelin": [30, "strength", [6], 3]
+        },
+        "armor": { "Studded_Leather": 0 }
       }
     ]
   }
