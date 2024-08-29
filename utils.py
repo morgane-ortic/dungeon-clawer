@@ -1,6 +1,7 @@
 from colorama import Fore, Style
 import json
 import os
+from random import randint
 import sys
 from time import sleep
 
@@ -25,3 +26,8 @@ def wrong_choice():
 
 def clear():
     os.system('cls||clear')
+
+def roll_dice(faces=20, bonus=0):
+    roll_result = randint(1, faces)
+    result = roll_result + bonus
+    return roll_result, result
