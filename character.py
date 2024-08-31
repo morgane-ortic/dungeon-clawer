@@ -1,4 +1,5 @@
 import re
+from time import sleep
 from colorama import Fore, Style
 from utils import prints, printy, read_json_file, roll_dice, sleep
 
@@ -54,23 +55,7 @@ class Character:
         sleep(1)
         roll = roll_dice(20, self.initiative)
         prints('......')
-        printy(f'{self.name} rolled {roll.base_result} + {self.initiative} = {roll.result}')
-
-    def attack(self, target):
-        '''attack action'''
-        # calculate damage
-        damage = (int)
-        print(f"{self.name} attacks {target.name}")
-        target.defend(self, damage)
-
-    def take_damage(self, damage):
-        '''calculate lost hp from attack'''
-        self.hp -= damage
-        if self.hp <= 0:
-            print(f"{self.name} has been defeated!")
-        else:
-            print(f"{self.name} takes {damage} damage and has {self.hp} hit points remaining")
-    
+        print(f'{self.name} rolls {roll.base_result} + {self.initiative} = {roll.result}')
 
 
 class PC(Character):
@@ -147,9 +132,41 @@ class PC(Character):
         print(f'\nWeapon equipped: {self.format_string(self.eq_weapon)}')
         print(f'Armor equipped: {self.format_string(self.eq_armor)}\n')
 
-    def attack(self, target):
-        print(f"{self.name} attacks {target.name}")
-        target.defend(self)
+    def atk_roll(self, target):
+        '''PC rolls for attack to know whether they hit'''
+        input('Press ENTER to attack')
+        # calculate roll result
+        roll = roll_dice(20, self.atk_bonus)
+        prints('....')
+        # display roll result
+        print(f'You roll {roll.base_result} + {self.atk_bonus} = {roll.result}')
+        # if target is hit, continue to damage roll
+        if roll >= target.ac:
+            print(f'You hit {target.name}!')
+            sleep(0.5)
+            self.dmg_roll()
+        # if target is missed, stop the character's turn without dealing damage
+        else:
+            print('You miss')
+
+    def dmg_roll(self, target):
+        '''PC rolls for damage (hit points) dealt to enemy'''
+        input('Press ENTER to roll for damage')
+        # calculate roll result
+        roll = roll_dice(self.dmg_dice, self.dmg_bonus)
+        prints('....')
+        # display roll result
+        print(f'You roll {roll.base_result} + {self.dmg_bonus} = {roll.result}')
+        # call take_damage() for target to apply damage to target
+        target.take_damage(roll.result)
+
+    def take_damage(self, damage):
+        '''Apply damage to PC when hit'''
+        self.hp -= damage
+        if self.hp <= 0:
+            print(f"You fall unconscious on the ground.")
+        else:
+            print(f"You take {damage} damage! {self.health} HP remaining.")
 
 
 
@@ -173,7 +190,11 @@ class NPC(Character):
         self.id = self.char_dictionary['id']
         self.xp = self.char_dictionary['xp']
         self.attacks = self.char_dictionary['attacks']
-    
+        # store attack bonus + damage. Only for the first weapon for now. (will be automatically used in combat)
+        self.atk_bns = self.attacks
+        self.main_atk, self.main_atk_stats = next(iter(self.attacks.items()))
+        self.atk_bns, self.dmg = self.main_atk_stats
+
 
     def print_char_sheet(self, abilities_bonus_values=[]):
         '''Print the NPC's sheet'''
@@ -211,5 +232,21 @@ class NPC(Character):
 
 
     def attack(self, target):
-        print(f"{self.name} attacks {target.name}")
-        target.defend(self)
+        '''NPC rolls for damage (hit points) dealt to enemy'''
+        print(f'{self.name} attacks!')
+        # calculate roll result
+        roll = roll_dice(20, self.atk_bonus)
+        prints('....')
+        # display roll result
+        print(f'{self.name} rolls {roll.result}')
+        # if target is hit, apply fixed damage value
+        if roll >= target.ac:
+            print(f'{self.name} hits {target.name}!')
+            sleep(0.5)
+            # For NPCs, damage dealt is always the self.damage value (fixed damage)
+            print(f'{target.name} takes {self.dmg} damage.')
+            # call take_damage() for target to apply damage to target
+            target.take_damage(self.dmg)
+        # if target is missed, stop the character's turn without dealing damage
+        else:
+            print(f'{self.name} misses')

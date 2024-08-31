@@ -1,7 +1,6 @@
 __pycache__/
 diagrams/
 working/
-tests/
 dungeon-crawler-venv/
 
 test.py
