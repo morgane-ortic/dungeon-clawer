@@ -25,14 +25,12 @@ class Character:
         self.proficiency = self.char_dictionary['abilities_and_bonuses']['proficiency']
 
         self.abilities = self.char_dictionary['abilities_and_bonuses']['abilities']
-        self.strength = self.abilities['strength']
-        self.dexterity = self.abilities['dexterity']
-        self.constitution = self.abilities['constitution']
-        self.intelligence = self.abilities['intelligence']
-        self.wisdom = self.abilities['wisdom']
-        self.charisma = self.abilities_bonuses['charisma']
+        for ability, value in self.abilities:
+            setattr(self, ability, value)
+        print(self.strength)
+        print(self.dexterity)
 
-        self.abilities_bonuses = self.chsar_dictionary['abilities_and_bonuses']['abilities_bonuses']
+        self.abilities_bonuses = self.char_dictionary['abilities_and_bonuses']['abilities_bonuses']
         self.str_bns= self.abilities_bonuses['strength']
         self.dex_bns = self.abilities_bonuses['dexterity']
         self.con_bns = self.abilities_bonuses['constitution']
@@ -44,7 +42,6 @@ class Character:
         self.pp = self.char_dictionary['pp']
 
         # We don't need to return any variable here, as the variables we'll need are now instance attributes
-    
 
     def format_string(self, s: str) -> str:
         '''We format each string on the fly by calling this method in print_char_sheet
@@ -52,12 +49,12 @@ class Character:
         Maybe move this method to utils.py if it's used in more files'''
         return re.sub(r'_+', ' ', s).title()
 
-    def calc_initiative(self):
+    def roll_initiative(self):
         input('Roll for Initiative [ENTER]:')
         sleep(1)
         roll = roll_dice(20, self.initiative)
         prints('......')
-        printy(f'You rolled {roll.base_result} + {self.initiative} = {roll.result}')
+        printy(f'{self.name} rolled {roll.base_result} + {self.initiative} = {roll.result}')
 
     def attack(self, target):
         '''attack action'''
@@ -68,11 +65,11 @@ class Character:
 
     def take_damage(self, damage):
         '''calculate lost hp from attack'''
-        self.health -= damage
-        if self.health <= 0:
+        self.hp -= damage
+        if self.hp <= 0:
             print(f"{self.name} has been defeated!")
         else:
-            print(f"{self.name} takes {damage} damage and has {self.health} health remaining")
+            print(f"{self.name} takes {damage} damage and has {self.hp} hit points remaining")
     
 
 
@@ -85,7 +82,6 @@ class PC(Character):
         super().__init__(sheet_path)
         # Call read_char_sheet method to get both general and PC specific character's attributes
         self._read_char_sheet()
-
 
     def _read_char_sheet(self):
         '''Read the data and get character's stats from the character sheet'''
@@ -116,7 +112,6 @@ class PC(Character):
         eq_armor_pair = next(iter(self.char_dictionary['equipment'][0]['armor'].items()))
         self.eq_armor, self.eq_armor_stats = eq_armor_pair
         self.attack = ""
-
 
     def print_char_sheet(self, abilities_bonus_values=[]):
         '''Print the character sheet'''
@@ -151,7 +146,6 @@ class PC(Character):
             print(f'    {formatted_skill}: {value}')
         print(f'\nWeapon equipped: {self.format_string(self.eq_weapon)}')
         print(f'Armor equipped: {self.format_string(self.eq_armor)}\n')
-
 
     def attack(self, target):
         print(f"{self.name} attacks {target.name}")
