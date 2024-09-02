@@ -56,6 +56,8 @@ class Character:
         roll = roll_dice(20, self.dex_bns)
         prints('......')
         printy(f'{self.name} rolled {roll.base_result} + {self.dex_bns} = {roll.result}')
+        print('\n')
+        return roll.result
 
     def attack(self, target):
         '''attack action'''
@@ -69,8 +71,10 @@ class Character:
         self.hp -= damage
         if self.hp <= 0:
             print(f"{self.name} has been defeated!")
+            input('...')
         else:
             print(f"{self.name} takes {damage} damage and has {self.hp} hit points remaining")
+            input('...')
     
 
 
@@ -108,7 +112,8 @@ class PC(Character):
         self.eq_weapon, self.eq_weapon_stats = eq_weapon_pair
         self.atk_range = self.eq_weapon_stats[0]
         self.atk_bonus = self.abilities_bonuses[self.eq_weapon_stats[1]] + self.proficiency
-        self.dmg_dice = self.eq_weapon_stats[2]
+        # adds all the damage dices of equipped weapons to define damage bonus
+        self.dmg_dice = sum(self.eq_weapon_stats[2])
         self.dmg_bonus = self.eq_weapon_stats[3]
         eq_armor_pair = next(iter(self.char_dictionary['equipment'][0]['armor'].items()))
         self.eq_armor, self.eq_armor_stats = eq_armor_pair
@@ -157,13 +162,15 @@ class PC(Character):
         # display roll result
         print(f'You roll {roll.base_result} + {self.atk_bonus} = {roll.result}')
         # if target is hit, continue to damage roll
-        if roll >= target.ac:
+        if roll.result >= target.ac:
             print(f'You hit {target.name}!')
             sleep(0.5)
-            self.dmg_roll()
+            input('...')
+            self.dmg_roll(target)
         # if target is missed, stop the character's turn without dealing damage
         else:
             print('You miss')
+            input('...')
 
     def dmg_roll(self, target):
         '''PC rolls for damage (hit points) dealt to enemy'''
@@ -174,6 +181,7 @@ class PC(Character):
         # display roll result
         print(f'You roll {roll.base_result} + {self.dmg_bonus} = {roll.result}')
         # call take_damage() for target to apply damage to target
+        print('\n')
         target.take_damage(roll.result)
 
     def take_damage(self, damage):
@@ -181,8 +189,10 @@ class PC(Character):
         self.hp -= damage
         if self.hp <= 0:
             print(f"You fall unconscious on the ground.")
+            input('...')
         else:
-            print(f"You take {damage} damage! {self.health} HP remaining.")
+            print(f"You take {damage} damage! {self.hp} HP remaining.")
+            input('...')
 
 
 
@@ -247,22 +257,39 @@ class NPC(Character):
         print('\n========================================================================')
 
 
-    def attack(self, target):
-        '''NPC rolls for damage (hit points) dealt to enemy'''
+    def atk_roll(self, target):
+        '''NPC rolls for attack to know whether they hit'''
         print(f'{self.name} attacks!')
+        sleep(2)
         # calculate roll result
-        roll = roll_dice(20, self.atk_bonus)
-        prints('....')
+        roll = roll_dice(20, self.atk_bns)
+        input('...')
         # display roll result
         print(f'{self.name} rolls {roll.result}')
         # if target is hit, apply fixed damage value
-        if roll >= target.ac:
+        if roll.result >= target.ac:
             print(f'{self.name} hits {target.name}!')
             sleep(0.5)
             # For NPCs, damage dealt is always the self.damage value (fixed damage)
             print(f'{target.name} takes {self.dmg} damage.')
             # call take_damage() for target to apply damage to target
+            input('...')
             target.take_damage(self.dmg)
+            print('\n')
         # if target is missed, stop the character's turn without dealing damage
         else:
             print(f'{self.name} misses')
+            print('\n')
+
+
+    def take_damage(self, damage):
+        '''Apply damage to PC when hit'''
+        self.hp -= damage
+        if self.hp <= 0:
+            print(f"{self.name} is dead!")
+            print('\n')
+            input('...')
+        else:
+            print(f"{self.name} take {damage} damage! {self.hp} HP remaining.")
+            print('\n')
+            input('...')

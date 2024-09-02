@@ -17,6 +17,7 @@ def main():
     while True:
         menu_choice = input('''1. Show your character's sheet
 2. Show enemy's character sheet
+3. Pick up a fight with a nasty goblin!
 ''')
         
         if menu_choice == '1':
