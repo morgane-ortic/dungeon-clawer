@@ -1,4 +1,3 @@
-import random
 from character import PC, NPC
 from utils import roll_dice
 
@@ -14,5 +13,5 @@ def combat (pc, npc):
     print(f'{p1.name} is starting')
 
     while pc.hp and npc.hp < 0:
-        p1.attack(p2)
-        p2.attack(p1)
+        p1.atk_roll(p2)
+        p2.atk_roll(p1)
