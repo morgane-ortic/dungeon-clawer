@@ -1,5 +1,6 @@
 from utils import *
 from character import PC, NPC
+from combat import combat
 from story_0_intro import story_intro
 
 
@@ -28,13 +29,7 @@ def main():
             goblin.print_char_sheet()
         elif menu_choice == '3':
             clear()
-            print(pc.eq_weapon)
-            print(pc.atk_range)
-            print(pc.atk_bonus)
-            print(pc.dmg_dice)
-            print(pc.dmg_bonus)
-        elif menu_choice == '4':
-            pc.calc_initiative()
+            combat(pc, goblin)
         else:
             wrong_choice
     

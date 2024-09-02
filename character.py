@@ -25,7 +25,7 @@ class Character:
         self.proficiency = self.char_dictionary['abilities_and_bonuses']['proficiency']
 
         self.abilities = self.char_dictionary['abilities_and_bonuses']['abilities']
-        for ability, value in self.abilities:
+        for ability, value in self.abilities.items():
             setattr(self, ability, value)
         print(self.strength)
         print(self.dexterity)
@@ -52,9 +52,9 @@ class Character:
     def roll_initiative(self):
         input('Roll for Initiative [ENTER]:')
         sleep(1)
-        roll = roll_dice(20, self.initiative)
+        roll = roll_dice(20, self.dex_bns)
         prints('......')
-        printy(f'{self.name} rolled {roll.base_result} + {self.initiative} = {roll.result}')
+        printy(f'{self.name} rolled {roll.base_result} + {self.dex_bns} = {roll.result}')
 
     def attack(self, target):
         '''attack action'''
