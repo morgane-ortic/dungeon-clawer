@@ -1,7 +1,13 @@
 from character import PC, NPC
-from utils import roll_dice
+from utils import sleep
 
 def combat (pc, npc):
+    print('It\'s a fight!')
+    sleep(1)
+    print(f'''
+{pc.name}: {pc.hp} HP
+{npc.name}: {npc.hp} HP
+''')
     pc_init = pc.roll_initiative()
     npc_init = npc.roll_initiative()
     if pc_init > npc_init:
