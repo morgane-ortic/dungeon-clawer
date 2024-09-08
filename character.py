@@ -181,7 +181,6 @@ class PC(Character):
         # display roll result
         print(f'You roll {roll.base_result} + {self.dmg_bonus} = {roll.result}')
         # call take_damage() for target to apply damage to target
-        print('\n')
         target.take_damage(roll.result)
 
     def take_damage(self, damage):

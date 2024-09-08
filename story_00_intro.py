@@ -11,4 +11,3 @@ def story_intro():
     prints(Fore.RED + 'D U N G E O N   C L A W E R\n' + Style.RESET_ALL, slow_text_delay)
     sleep(0.8)
     input('Press Enter to start the game...')
-    print()
