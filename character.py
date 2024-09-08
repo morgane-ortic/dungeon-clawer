@@ -28,8 +28,6 @@ class Character:
         self.abilities = self.char_dictionary['abilities_and_bonuses']['abilities']
         for ability, value in self.abilities.items():
             setattr(self, ability, value)
-        print(self.strength)
-        print(self.dexterity)
 
         self.abilities_bonuses = self.char_dictionary['abilities_and_bonuses']['abilities_bonuses']
         self.str_bns= self.abilities_bonuses['strength']

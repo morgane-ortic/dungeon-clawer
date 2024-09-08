@@ -9,6 +9,10 @@ from time import sleep
 
 slow_text_delay = 0.15
 
+# Global variable to store dialogs
+dialogs = {}
+
+
 def read_json_file(file_path):
     '''Read the data from a json file'''
     with open(file_path, 'r') as file:
@@ -20,10 +24,35 @@ def prints(text, delay=0.05):
         sys.stdout.write(char)
         sys.stdout.flush()
         sleep(delay)
+    input('\n...')
+    
+def prints_plus(text, delay = 0.15):
+    '''slower prints (by default) without input at the end'''
+    for char in text:
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        sleep(delay)
     print()  # Move to the next line after printing the text
 
 def printy(text, color=Fore.YELLOW):
     print(color + text + Style.RESET_ALL)
+
+
+def load_dialogs(file_path):
+    '''Load the data from appropriate json file and store it in the global variable'''
+    global dialogs
+    dialogs = read_json_file(file_path)
+
+def get_char_dialog(character):
+    '''get all dialogs for each character'''
+    return dialogs.get(character, {})
+
+def dprint(character, dialog_key):
+    '''Print a specific dialog line for a character'''
+    dialog = get_char_dialog(character).get(dialog_key, "")
+
+    prints(dialog)
+
 
 def wrong_choice():
     '''Default message when a wrong choice in inputed by player'''
