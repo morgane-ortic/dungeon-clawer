@@ -10,6 +10,8 @@ def main():
     clear()
     # instantiate the PC with the proper character sheet file as argument
     pc = PC('char_sheet.json')
+    pc.print_char_sheet()
+    input('')
     
     # story_intro()
 

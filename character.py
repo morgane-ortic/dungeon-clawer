@@ -93,7 +93,9 @@ class PC(Character):
 
         # unpack the dictionary to get the additional PC data
         self.char_class = self.char_dictionary['char_class']
+        self.level = self.char_dictionary['level']
         self.species = self.char_dictionary['species']
+        self.experience = self.char_dictionary['experience']
 
         self.save_bonuses = self.char_dictionary['abilities_and_bonuses']['save_bonuses']
         self.str_sv_bns= self.save_bonuses['strength']
@@ -115,6 +117,7 @@ class PC(Character):
         self.dmg_bonus = self.eq_weapon_stats[3]
         eq_armor_pair = next(iter(self.char_dictionary['equipment'][0]['armor'].items()))
         self.eq_armor, self.eq_armor_stats = eq_armor_pair
+        self.shield = self.char_dictionary['equipment'][0]['shield']
         self.attack = ""
 
     def print_char_sheet(self, abilities_bonus_values=[]):
@@ -125,31 +128,62 @@ class PC(Character):
         for ability, value in self.abilities_bonuses.items():
             self.abilities_bonus_values.append(value)
 
-        # Print the character's sheet
-        print(Fore.RED + f'{self.name.upper()}' + Style.RESET_ALL)
-        print(f'\nClass: {self.format_string(self.char_class)}')
-        print(f'Species: {self.format_string(self.species)}')
-        print(f'\nArmor Class: {self.ac}')
-        print(f'Hit Points: {self.hp}')
-        print(f'Proficiency: {self.proficiency}')
-        print ('\nAbilities:')
-        # Print every ability + value + associated bonus from our abilities_bonus_values list
+        # print yes or no if shield is true or false
+        if self.shield == True:
+            eq_shield = 'Yes'
+        else:
+            eq_shield = 'No'
+
+        # Define column width
+        column_width = 30
+        
+        # print name outside of columns, on top and in the middle of screen
+        print(f'                      {Fore.RED}{self.name.upper()}{Style.RESET_ALL}')
+        print('')
+
+        # Prepare the character sheet content
+        left_column = [
+            f'Class: {self.format_string(self.char_class)}',
+            f'Level: {self.level}',
+            f'Species: {self.format_string(self.species)}',
+            f'Experience points: {self.experience}',
+            '', # add empty lines instead of \n to not affect right column formatting
+            f'Armor Class: {self.ac}',
+            f'Hit Points: {self.hp}',
+            f'Proficiency: {self.proficiency}',
+            f'Passive Perception: {self.pp}',
+            '',
+            'Abilities:'
+        ]
+
         for ability, value in self.abilities.items():
             formatted_ability = self.format_string(ability)
-            print(f'    {formatted_ability}: {value} ({self.abilities_bonuses[ability]})')
-        print('\nSave Bonuses:')
-        # Print every save bonus + value
+            left_column.append(f'    {formatted_ability}: {value} ({self.abilities_bonuses[ability]})')
+
+        left_column.extend(['', 'Save Bonuses:'])
+
         for ability, value in self.save_bonuses.items():
             formatted_ability = self.format_string(ability)
-            print(f'    {formatted_ability}: {value}')        
-        print(f'Passive Wisdom (Perception):{self.pp}')
-        print('\nSkills:')
-        # Print every skill + value
-        for skill, value in self.skills.items():#
+            left_column.append(f'    {formatted_ability}: {value}')
+
+        left_column.extend([
+            f'\nWeapon: {self.format_string(self.eq_weapon)}',
+            f'Armor: {self.format_string(self.eq_armor)}',
+            f'Shield: {eq_shield}'
+        ])
+
+        right_column = ['Skills:']
+
+        for skill, value in self.skills.items():
             formatted_skill = self.format_string(skill)
-            print(f'    {formatted_skill}: {value}')
-        print(f'\nWeapon equipped: {self.format_string(self.eq_weapon)}')
-        print(f'Armor equipped: {self.format_string(self.eq_armor)}\n')
+            right_column.append(f'  {formatted_skill}: {value}')
+
+        # Print the character sheet in two columns
+        max_lines = max(len(left_column), len(right_column))
+        for i in range(max_lines):
+            left_text = left_column[i] if i < len(left_column) else ''
+            right_text = right_column[i] if i < len(right_column) else ''
+            print(f'{left_text:<{column_width}} {right_text}')
 
     def atk_roll(self, target):
         '''PC rolls for attack to know whether they hit'''
