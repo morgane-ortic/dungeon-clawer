@@ -1,6 +1,6 @@
 __pycache__/
 orga/
 diagrams/
-dungeon-crawler-venv/
+.venv/
 
 test.py
