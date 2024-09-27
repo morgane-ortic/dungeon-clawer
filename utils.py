@@ -18,6 +18,8 @@ def read_json_file(file_path):
     with open(file_path, 'r') as file:
         return json.load(file)
     
+#========================DIALOG FUNCTIONS========================
+    
 def prints(text, delay=0.05):
     '''Print text with a typewriter effect'''
     for char in text:
@@ -41,7 +43,12 @@ def printy(text, color=Fore.YELLOW):
 def load_dialogs(file_path):
     '''Load the data from appropriate json file and store it in the global variable'''
     global dialogs
-    dialogs = read_json_file(file_path)
+    loaded_dialogs = read_json_file(file_path)
+    if not dialogs:
+        dialogs = loaded_dialogs
+    # if dialogs are already loaded, add new ones to dialogs
+    else:
+        dialogs.update(loaded_dialogs)
 
 def get_char_dialog(character):
     '''get all dialogs for each character'''
@@ -54,12 +61,10 @@ def dprint(dialog_key="ERROR: DIALOG NOT FOUND", character='narrator'):
     prints(dialog)
 
 
-def wrong_choice():
-    '''Default message when a wrong choice in inputed by player'''
-    prints(Fore.RED + 'INVALID CHOICE! Please enter a valid choice:\n' + Style.RESET_ALL, slow_text_delay)
-
 def clear():
     os.system('cls||clear')
+
+#========================GAMEPLAY FUNCTIONS========================
 
 Result = namedtuple('Result', ['base_result', 'result'])
 
