@@ -1,4 +1,4 @@
-from utils import load_dialogs, prints, prints_plus, dprint
+from utils import load_dialogs, prints, prints_plus, print_dialog as printd
 from game_lines import what_do, wrong_choice
 
 def init_dialogs():
@@ -9,9 +9,9 @@ def init_dialogs():
 
 def wake_up():
     prints_plus('......', 0.5)
-    dprint('wake_up_010')
-    dprint('wake_up_020')
-    dprint('wake_up_030')
-    dprint('wake_up_040')
+    printd('wake_up_010')
+    printd('wake_up_020')
+    printd('wake_up_030')
+    printd('wake_up_040')
     what_do()
     

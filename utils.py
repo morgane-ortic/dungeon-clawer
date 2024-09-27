@@ -26,6 +26,7 @@ def prints(text, delay=0.05):
         sys.stdout.write(char)
         sys.stdout.flush()
         sleep(delay)
+    # ends with an input: player has to press enter to continue
     input('\n...')
     
 def prints_plus(text, delay = 0.15):
@@ -54,7 +55,7 @@ def get_char_dialog(character):
     '''get all dialogs for each character'''
     return dialogs.get(character, {})
 
-def dprint(dialog_key="ERROR: DIALOG NOT FOUND", character='narrator'):
+def print_dialog(dialog_key="ERROR: DIALOG NOT FOUND", character='narrator'):
     '''Print a specific dialog line for a character'''
     dialog = get_char_dialog(character).get(dialog_key, "")
 
