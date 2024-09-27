@@ -47,7 +47,7 @@ def get_char_dialog(character):
     '''get all dialogs for each character'''
     return dialogs.get(character, {})
 
-def dprint(character, dialog_key):
+def dprint(character='narrator', dialog_key="ERROR: DIALOG NOT FOUND"):
     '''Print a specific dialog line for a character'''
     dialog = get_char_dialog(character).get(dialog_key, "")
 
