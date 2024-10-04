@@ -7,3 +7,6 @@ def what_do():
 def wrong_choice():
     '''Default message when a wrong choice in inputed by player'''
     input(Fore.RED + '\nINVALID CHOICE! Please enter a valid choice:\n' + Style.RESET_ALL, slow_text_delay)
+
+def unavailable_feature():
+    input('Sorry, this feature isn\'t implemented yet :/')
