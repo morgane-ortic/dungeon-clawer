@@ -10,4 +10,16 @@ def story_intro():
     sleep(1)
     prints_plus(Fore.RED + 'D U N G E O N   C L A W E R\n' + Style.RESET_ALL, slow_text_delay)
     sleep(0.8)
-    input('Press Enter to start the game...')
+    input('Press Enter to start the game...\n')
+
+def main_menu():
+    main_menu_choices = [
+        'Start game story',
+        'Arena',
+        'Exit game\n'
+    ]
+    for index, choice in enumerate(main_menu_choices):
+        print(f'{index + 1}. {choice}')
+
+    menu_choice = int(input('Enter your choice: '))
+    return menu_choice

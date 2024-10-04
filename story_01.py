@@ -8,7 +8,7 @@ def init_dialogs():
     load_dialogs('dialogs/story_01.json')
 
 def wake_up():
-    prints_plus('......', 0.5)
+    prints_plus('...', 0.5)
     printd('wake_up_010')
     printd('wake_up_020')
     printd('wake_up_030')
