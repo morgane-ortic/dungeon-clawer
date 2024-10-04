@@ -1,5 +1,5 @@
 from colorama import Fore, Style
-from utils import prints, slow_text_delay
+from utils import clear, prints, slow_text_delay
 
 def what_do():
     input('\nWhat do you do?\n')
@@ -9,4 +9,5 @@ def wrong_choice():
     input(Fore.RED + '\nINVALID CHOICE! Please enter a valid choice:\n' + Style.RESET_ALL, slow_text_delay)
 
 def unavailable_feature():
-    input('Sorry, this feature isn\'t implemented yet :/')
+    input('\nSorry, this feature isn\'t implemented yet :/ ...\n')
+    clear()

@@ -1,7 +1,8 @@
 from time import sleep
-from utils import clear, prints
+from utils import clear, prints, prints_plus
 from character import PC, NPC
 from combat import combat
+from game_lines import unavailable_feature
 from story_00_intro import story_intro, main_menu
 from story_01 import init_dialogs as init_dialogs_01, wake_up
 
@@ -23,9 +24,10 @@ def main():
             init_dialogs_01()
             wake_up()
         elif choice == 2:
-            arena()
+            unavailable_feature()
+            continue
         elif choice == 3:
-            prints('Exiting game............s')
+            prints_plus('Exiting game............', 0.05)
             exit()
         else:
             prints('Invalid choice. Please try again.\n')
