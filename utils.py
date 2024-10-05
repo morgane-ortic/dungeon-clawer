@@ -73,3 +73,19 @@ def roll_dice(faces=20, bonus=0):
     base_result = randint(1, faces)
     result = base_result + bonus
     return Result(base_result, result)
+
+
+#========================NAMING FUNCTIONS========================
+
+def text_to_snake_case(string):
+    cleaned_string = ''.join(char if char.isalnum() or char == '_' else ' ' for char in string)
+    cleaned_string = cleaned_string.lower()
+    snake_case_string = '_'.join(cleaned_string.split())
+    return snake_case_string
+
+
+def snake_case_to_text(snake_str):
+
+    text_str = snake_str.replace('_', ' ')
+    text_str = text_str.title()
+    return text_str
