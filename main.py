@@ -1,4 +1,5 @@
 from time import sleep
+from arena import arena
 from utils import clear, prints, prints_plus
 from character import PC, NPC
 from combat import combat
@@ -7,6 +8,7 @@ from story_00_intro import story_intro, main_menu
 from story_01 import init_dialogs as init_dialogs_01, wake_up
 
 what_do = 'What do you do? '
+
 
 def main():
     clear()       
@@ -24,8 +26,7 @@ def main():
             init_dialogs_01()
             wake_up()
         elif choice == 2:
-            unavailable_feature()
-            continue
+            arena()
         elif choice == 3:
             prints_plus('Exiting game............', 0.05)
             exit()
