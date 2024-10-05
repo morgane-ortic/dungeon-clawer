@@ -1,7 +1,8 @@
 from character import PC, NPC
-from utils import sleep
+from utils import clear, sleep
 
 def combat (pc, npc):
+    clear()
     print('It\'s a fight!')
     sleep(1)
     print(f'''

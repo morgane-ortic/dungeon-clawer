@@ -9,8 +9,6 @@ class Character:
     def __init__(self, sheet_path):
         '''Initialise the class with character's data from read_char_sheet'''
         self.char_sheet = read_json_file(sheet_path)
-        # Get character data from the character sheet by calling the read_char_sheet() method
-        self._read_char_sheet()
 
 
     # The method is private as it only needs to be accessed from other methods inside the class
@@ -77,7 +75,7 @@ class Character:
 class PC(Character):
     '''Character class to store the character's data'''
 
-    def __init__(self, sheet_path, npc_id):
+    def __init__(self, sheet_path):
         '''Initialise the class with character's data from read_char_sheet'''
         # Inherit the init method from the parent class Character
         super().__init__(sheet_path)
@@ -237,21 +235,25 @@ class NPC(Character):
         self._get_npc_by_id(npc_id)
         # Call read_char_sheet method to get both general and NPC specific character's attributes
         self._read_char_sheet()
-
     
     def _get_npc_by_id(self, npc_id):
         '''access the dictionary with the selectet npc's data'''
         for npc in self.char_sheet:
             if npc.get('id') == npc_id:
                 self.char_dictionary = npc
+                input(f'char dictionary created: {self.char_dictionary}...')
+                return
         raise ValueError(f"Character with id {npc_id} not found")
 
 
     def _read_char_sheet(self):
+        input('Instantiate basic character attributes...')
         '''Read the data and get NPC's stats from the character sheet'''
 
         # Inherit the instance attributes (characteristics) from the parent class Character
         super()._read_char_sheet()
+
+        input('Instantiate npc-specific attributes...')
 
         # unpack the dictionary to get the additional NPC data
         self.id = self.char_dictionary['id']
