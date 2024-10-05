@@ -16,8 +16,6 @@ class Character:
     # The method is private as it only needs to be accessed from other methods inside the class
     def _read_char_sheet(self):
         '''Read the data and get character's stats from the character sheet'''
-        # access the dictionary with the character's data
-        self.char_dictionary = self.char_sheet[0]
         
         # unpack the dictionary to get all the character's data
         self.name = self.char_dictionary['name']
@@ -79,7 +77,7 @@ class Character:
 class PC(Character):
     '''Character class to store the character's data'''
 
-    def __init__(self, sheet_path):
+    def __init__(self, sheet_path, npc_id):
         '''Initialise the class with character's data from read_char_sheet'''
         # Inherit the init method from the parent class Character
         super().__init__(sheet_path)
@@ -88,6 +86,8 @@ class PC(Character):
 
     def _read_char_sheet(self):
         '''Read the data and get character's stats from the character sheet'''
+        # access the dictionary with the character's data
+        self.char_dictionary = self.char_sheet[0]
         # Inherit the instance attributes (characteristics) from the parent class Character
         super()._read_char_sheet()
 
@@ -230,16 +230,26 @@ class PC(Character):
 class NPC(Character):
     '''NPC subclass for getting and using NPCs characteristics'''
     
-    def __init__(self, sheet_path):
+    def __init__(self, sheet_path, npc_id):
         '''Initialise the class with NPC's data from read_char_sheet'''
         # Inherit the init method from the parent class Character
         super().__init__(sheet_path)
+        self._get_npc_by_id(npc_id)
         # Call read_char_sheet method to get both general and NPC specific character's attributes
         self._read_char_sheet()
+
+    
+    def _get_npc_by_id(self, npc_id):
+        '''access the dictionary with the selectet npc's data'''
+        for npc in self.char_sheet:
+            if npc.get('id') == npc_id:
+                self.char_dictionary = npc
+        raise ValueError(f"Character with id {npc_id} not found")
 
 
     def _read_char_sheet(self):
         '''Read the data and get NPC's stats from the character sheet'''
+
         # Inherit the instance attributes (characteristics) from the parent class Character
         super()._read_char_sheet()
 
