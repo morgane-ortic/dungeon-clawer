@@ -20,22 +20,32 @@ def read_json_file(file_path):
     
 #========================DIALOG FUNCTIONS========================
     
-def prints(text, delay=0.05):
+
+def print_typewriter(text, delay=0.05):
     '''Print text with a typewriter effect'''
     for char in text:
         sys.stdout.write(char)
         sys.stdout.flush()
         sleep(delay)
+
+
+def prints(text, delay=0.05):
+    '''Print text with a typewriter effect'''
+    print_typewriter(text, delay)
     # ends with an input: player has to press enter to continue
     input('\n...')
+
+
+def prints_auto(text, delay=0.05):
+    print_typewriter(text, delay)
+    print()
     
+
 def prints_plus(text, delay = 0.15):
     '''slower prints (by default) without input at the end'''
-    for char in text:
-        sys.stdout.write(char)
-        sys.stdout.flush()
-        sleep(delay)
+    print_typewriter(text, delay)
     print()  # Move to the next line after printing the text
+
 
 def printy(text, color=Fore.YELLOW):
     print(color + text + Style.RESET_ALL)

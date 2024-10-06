@@ -1,7 +1,7 @@
 import re
 from time import sleep
 from colorama import Fore, Style
-from utils import prints, printy, read_json_file, roll_dice, sleep
+from utils import prints_auto, printy, read_json_file, roll_dice, sleep
 
 class Character:
     '''Character class to store the character's data'''
@@ -45,10 +45,10 @@ class Character:
         return re.sub(r'_+', ' ', s).title()
 
     def roll_initiative(self):
-        input('Roll for Initiative [ENTER]:')
+        input(f'{self.name} rolls for Initiative [ENTER]:')
         sleep(1)
         roll = roll_dice(20, self.dex_bns)
-        prints('......')
+        prints_auto('......')
         printy(f'{self.name} rolled {roll.base_result} + {self.dex_bns} = {roll.result}')
         print('\n')
         return roll.result
@@ -188,7 +188,7 @@ class PC(Character):
         input('Press ENTER to attack')
         # calculate roll result
         roll = roll_dice(20, self.atk_bonus)
-        prints('....')
+        prints_auto('....')
         # display roll result
         print(f'You roll {roll.base_result} + {self.atk_bonus} = {roll.result}')
         # if target is hit, continue to damage roll
@@ -207,7 +207,7 @@ class PC(Character):
         input('Press ENTER to roll for damage')
         # calculate roll result
         roll = roll_dice(self.dmg_dice, self.dmg_bonus)
-        prints('....')
+        prints_auto('....')
         # display roll result
         print(f'You roll {roll.base_result} + {self.dmg_bonus} = {roll.result}')
         # call take_damage() for target to apply damage to target
@@ -241,19 +241,15 @@ class NPC(Character):
         for npc in self.char_sheet:
             if npc.get('id') == npc_id:
                 self.char_dictionary = npc
-                input(f'char dictionary created: {self.char_dictionary}...')
                 return
         raise ValueError(f"Character with id {npc_id} not found")
 
 
     def _read_char_sheet(self):
-        input('Instantiate basic character attributes...')
         '''Read the data and get NPC's stats from the character sheet'''
 
         # Inherit the instance attributes (characteristics) from the parent class Character
         super()._read_char_sheet()
-
-        input('Instantiate npc-specific attributes...')
 
         # unpack the dictionary to get the additional NPC data
         self.id = self.char_dictionary['id']
@@ -303,7 +299,6 @@ class NPC(Character):
     def atk_roll(self, target):
         '''NPC rolls for attack to know whether they hit'''
         print(f'{self.name} attacks!')
-        sleep(2)
         # calculate roll result
         roll = roll_dice(20, self.atk_bns)
         input('...')
@@ -333,6 +328,6 @@ class NPC(Character):
             print('\n')
             input('...')
         else:
-            print(f"{self.name} take {damage} damage! {self.hp} HP remaining.")
+            print(f"{self.name} takess {damage} damage! {self.hp} HP remaining.")
             print('\n')
             input('...')
