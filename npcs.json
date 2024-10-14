@@ -28,6 +28,7 @@
       },
       "pp": 9,
       "xp": 50,
+      "cr": 0.25,
       "attacks": {
         "scimitar": [4, 5],
         "short_bow": [4, 5]

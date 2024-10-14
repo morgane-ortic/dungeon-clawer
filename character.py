@@ -254,6 +254,7 @@ class NPC(Character):
         # unpack the dictionary to get the additional NPC data
         self.id = self.char_dictionary['id']
         self.xp = self.char_dictionary['xp']
+        self.cr = self.char_dictionary['cr']
         self.attacks = self.char_dictionary['attacks']
         # store attack bonus + damage. Only for the first weapon for now. (will be automatically used in combat)
         self.atk_bns = self.attacks
