@@ -12,13 +12,15 @@ what_do = 'What do you do? '
 
 def main():
     clear()       
-    # story_intro()
+    story_intro()
+
+
+    pc = PC('char_sheet.json')
 
 
     while True:
         choice = main_menu()
         if choice == 1:
-            pc = PC('char_sheet.json')
 
             # clear the terminal after each part/sub-part
             clear()
@@ -28,6 +30,11 @@ def main():
         elif choice == 2:
             arena()
         elif choice == 3:
+            print('''
+
+''')
+            pc.print_char_sheet()
+        elif choice == 4:
             prints_plus('Exiting game............', 0.05)
             exit()
         else:

@@ -15,6 +15,7 @@ def main_menu():
     main_menu_choices = [
         'Start game story',
         'Arena',
+        'See character sheet',
         'Exit game\n'
     ]
     for index, choice in enumerate(main_menu_choices):

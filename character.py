@@ -329,6 +329,6 @@ class NPC(Character):
             print('\n')
             input('...')
         else:
-            print(f"{self.name} takess {damage} damage! {self.hp} HP remaining.")
+            print(f"{self.name} takes {damage} damage! {self.hp} HP remaining.")
             print('\n')
             input('...')
