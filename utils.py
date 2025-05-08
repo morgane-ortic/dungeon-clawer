@@ -50,6 +50,9 @@ def prints_plus(text, delay = 0.15):
 def printy(text, color=Fore.YELLOW):
     print(color + text + Style.RESET_ALL)
 
+def print_line():
+    print('')
+
 
 def load_dialogs(file_path):
     '''Load the data from appropriate json file and store it in the global variable'''
@@ -65,11 +68,17 @@ def get_char_dialog(character):
     '''get all dialogs for each character'''
     return dialogs.get(character, {})
 
-def print_dialog(dialog_key="ERROR: DIALOG NOT FOUND", character='narrator'):
+def printd(dialog_key="ERROR: DIALOG NOT FOUND", character='narrator'):
     '''Print a specific dialog line for a character'''
     dialog = get_char_dialog(character).get(dialog_key, "")
 
     prints(dialog)
+
+def print_choice(dialog_key="ERROR: DIALOG NOT FOUND", character='narrator'):
+    '''Print a specific dialog line for a character'''
+    dialog = get_char_dialog(character).get(dialog_key, "")
+
+    print(dialog)
 
 
 def clear():

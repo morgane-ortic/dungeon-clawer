@@ -5,7 +5,7 @@ from character import PC, NPC
 from combat import combat
 from game_lines import unavailable_feature
 from story_00_intro import story_intro, main_menu
-from story_01 import create_npcs as create_npcs_01, init_dialogs as init_dialogs_01, wake_up
+from story_01 import LevelStory01
 
 what_do = 'What do you do? '
 
@@ -21,14 +21,10 @@ def main():
     while True:
         choice = main_menu()
         if choice == 1:
-
             # clear the terminal after each part/sub-part
             clear()
-            # Create all npcs for the next area
-            create_npcs_01()
-            # Initialize all dialogs for the next area
-            init_dialogs_01()
-            wake_up(pc)
+            story_01 = LevelStory01(pc)
+            story_01.wake_up()
         elif choice == 2:
             arena(pc)
         elif choice == 3:

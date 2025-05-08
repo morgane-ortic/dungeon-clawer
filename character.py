@@ -59,7 +59,7 @@ class Character:
                 skill_bns = 0
         input(f'{self.address} roll{self.verb_form} for {skill}...')
         roll = roll_dice(20, skill_bns)
-        printy(f'{self.address} rolled {roll.base_result} + {skill_bns} = {roll.result}')
+        printy(f'{self.address} rolled {roll.base_result} + {skill_bns} = {roll.result}\n')
         return roll.result
 
     def roll_initiative(self):
