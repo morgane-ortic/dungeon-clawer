@@ -7,11 +7,11 @@ def init_dialogs():
     dialogs = {}
     load_dialogs('dialogs/story_01.json')
 
-def wake_up():
+def wake_up(pc):
     prints_plus('...', 0.5)
     printd('wake_up_010')
     printd('wake_up_020')
-    printd('wake_up_030')
-    printd('wake_up_040')
     what_do()
+    roll_per_10 = pc.roll('str')
+    printd('wake_up_030')
     

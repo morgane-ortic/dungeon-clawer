@@ -26,9 +26,9 @@ def main():
             clear()
             # Initialize all dialogs for the next area
             init_dialogs_01()
-            wake_up()
+            wake_up(pc)
         elif choice == 2:
-            arena()
+            arena(pc)
         elif choice == 3:
             print('''
 

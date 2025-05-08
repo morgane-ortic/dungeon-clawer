@@ -11,8 +11,7 @@ def list_enemies():
         npc_names.append(npc['name'])
     return npc_names
 
-def arena():
-    pc = PC('char_sheet.json')
+def arena(pc):
     npc_names = list_enemies()
 
     while True:

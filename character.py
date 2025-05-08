@@ -44,12 +44,18 @@ class Character:
         Maybe move this method to utils.py if it's used in more files'''
         return re.sub(r'_+', ' ', s).title()
 
+    def roll(self, skill):
+        skill_bns = getattr(self, f"{skill}_bns")
+        input(f'{self.address} roll{self.verb_form} for {skill}...')
+        roll = roll_dice(20, skill_bns)
+        printy(f'{self.address} rolled {roll.base_result} + {self.dex_bns} = {roll.result}')
+
     def roll_initiative(self):
-        input(f'{self.name} rolls for Initiative [ENTER]:')
+        input(f'{self.address} roll{self.verb_form} for Initiative [ENTER]:')
         sleep(1)
         roll = roll_dice(20, self.dex_bns)
         prints_auto('......')
-        printy(f'{self.name} rolled {roll.base_result} + {self.dex_bns} = {roll.result}')
+        printy(f'{self.address} rolled {roll.base_result} + {self.dex_bns} = {roll.result}')
         print('\n')
         return roll.result
 
@@ -84,6 +90,8 @@ class PC(Character):
 
     def _read_char_sheet(self):
         '''Read the data and get character's stats from the character sheet'''
+        self.address = 'You'
+        self.verb_form = ''
         # access the dictionary with the character's data
         self.char_dictionary = self.char_sheet[0]
         # Inherit the instance attributes (characteristics) from the parent class Character
@@ -250,6 +258,9 @@ class NPC(Character):
 
         # Inherit the instance attributes (characteristics) from the parent class Character
         super()._read_char_sheet()
+
+        self.address = self.name
+        self.verb_form = 's'
 
         # unpack the dictionary to get the additional NPC data
         self.id = self.char_dictionary['id']
