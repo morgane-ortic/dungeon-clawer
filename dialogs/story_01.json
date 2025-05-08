@@ -5,6 +5,16 @@
             
             "wake_up_020": "Thanks to your night vision, you can see that everything seems in order in the small inn room.\nBy your side, the cutie you're spending your night with is still sleeping peacefully.\nIn the other beds, the other travellers seem to be enjoying their rest too. Everything looks calm.",
 
-            "wake_up_030": "Suddenly..."
+            "npc_stealth_10_fail": "Suddenly, you hear sounds outside. Muffled footsteps...",
+
+            "npc_stealth_10_success": "You slowly get more relaxed in the quiet night air. Sleep is coming back to you...",
+
+            "choice_back_to_bed_10": "1. Go back to bed",
+
+            "choice_back_to_bed_20": "2. Stay a bit longer at the window",
+
+            "choice_back_to_bed_yes": "You curl back against the cutie in the bed and start drifting into sleep.",
+
+            "choice_back_to_bed_no": "You stay there, humming the rich smell of the fruit trees."
         }
 }

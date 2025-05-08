@@ -34,7 +34,6 @@ class Character:
         self.cha_bns = self.abilities_bonuses['charisma']
 
         self.skills = self.char_dictionary['skills']
-        print(self.skills)
         for key, value in self.skills.items():
             setattr(self, key, value)
 
@@ -49,10 +48,19 @@ class Character:
         return re.sub(r'_+', ' ', s).title()
 
     def roll(self, skill):
-        skill_bns = getattr(self, f"{skill}_bns")
+        abilities = ['str', 'dex', 'con', 'int', 'wis', 'cha']
+        # Add _bns to abilities to identify them correcty on char sheet
+        if skill in abilities:
+            skill_bns = getattr(self, f'{skill}_bns')
+        else:
+            try:
+                skill_bns = getattr(self, skill)
+            except:
+                skill_bns = 0
         input(f'{self.address} roll{self.verb_form} for {skill}...')
         roll = roll_dice(20, skill_bns)
-        printy(f'{self.address} rolled {roll.base_result} + {self.dex_bns} = {roll.result}')
+        printy(f'{self.address} rolled {roll.base_result} + {skill_bns} = {roll.result}')
+        return roll.result
 
     def roll_initiative(self):
         input(f'{self.address} roll{self.verb_form} for Initiative [ENTER]:')
