@@ -34,6 +34,9 @@ class Character:
         self.cha_bns = self.abilities_bonuses['charisma']
 
         self.skills = self.char_dictionary['skills']
+        for key, value in self.skills.items():
+            setattr(self, key, value)
+
         self.pp = self.char_dictionary['pp']
 
         # We don't need to return any variable here, as the variables we'll need are now instance attributes
@@ -44,12 +47,27 @@ class Character:
         Maybe move this method to utils.py if it's used in more files'''
         return re.sub(r'_+', ' ', s).title()
 
+    def roll(self, skill):
+        abilities = ['str', 'dex', 'con', 'int', 'wis', 'cha']
+        # Add _bns to abilities to identify them correcty on char sheet
+        if skill in abilities:
+            skill_bns = getattr(self, f'{skill}_bns')
+        else:
+            try:
+                skill_bns = getattr(self, skill)
+            except:
+                skill_bns = 0
+        input(f'{self.address} roll{self.verb_form} for {skill}...')
+        roll = roll_dice(20, skill_bns)
+        printy(f'{self.address} rolled {roll.base_result} + {skill_bns} = {roll.result}\n')
+        return roll.result
+
     def roll_initiative(self):
-        input(f'{self.name} rolls for Initiative [ENTER]:')
+        input(f'{self.address} roll{self.verb_form} for Initiative [ENTER]:')
         sleep(1)
         roll = roll_dice(20, self.dex_bns)
         prints_auto('......')
-        printy(f'{self.name} rolled {roll.base_result} + {self.dex_bns} = {roll.result}')
+        printy(f'{self.address} rolled {roll.base_result} + {self.dex_bns} = {roll.result}')
         print('\n')
         return roll.result
 
@@ -84,6 +102,8 @@ class PC(Character):
 
     def _read_char_sheet(self):
         '''Read the data and get character's stats from the character sheet'''
+        self.address = 'You'
+        self.verb_form = ''
         # access the dictionary with the character's data
         self.char_dictionary = self.char_sheet[0]
         # Inherit the instance attributes (characteristics) from the parent class Character
@@ -251,6 +271,9 @@ class NPC(Character):
         # Inherit the instance attributes (characteristics) from the parent class Character
         super()._read_char_sheet()
 
+        self.address = self.name
+        self.verb_form = 's'
+
         # unpack the dictionary to get the additional NPC data
         self.id = self.char_dictionary['id']
         self.xp = self.char_dictionary['xp']
@@ -329,6 +352,6 @@ class NPC(Character):
             print('\n')
             input('...')
         else:
-            print(f"{self.name} takess {damage} damage! {self.hp} HP remaining.")
+            print(f"{self.name} takes {damage} damage! {self.hp} HP remaining.")
             print('\n')
             input('...')

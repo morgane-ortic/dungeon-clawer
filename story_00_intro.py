@@ -9,14 +9,16 @@ def story_intro():
     prints_plus('            in\n')
     prints_plus(Fore.RED + 'D U N G E O N   C L A W E R\n' + Style.RESET_ALL, slow_text_delay)
     sleep(0.8)
-    input('Press Enter to start the game...\n')
+    input('Press Enter to start the game...')
 
 def main_menu():
     main_menu_choices = [
         'Start game story',
         'Arena',
+        'See character sheet',
         'Exit game\n'
     ]
+    print('')
     for index, choice in enumerate(main_menu_choices):
         print(f'{index + 1}. {choice}')
 

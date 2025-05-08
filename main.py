@@ -5,29 +5,34 @@ from character import PC, NPC
 from combat import combat
 from game_lines import unavailable_feature
 from story_00_intro import story_intro, main_menu
-from story_01 import init_dialogs as init_dialogs_01, wake_up
+from story_01 import LevelStory01
 
 what_do = 'What do you do? '
 
 
 def main():
     clear()       
-    # story_intro()
+    story_intro()
+
+
+    pc = PC('char_sheet.json')
 
 
     while True:
         choice = main_menu()
         if choice == 1:
-            pc = PC('char_sheet.json')
-
             # clear the terminal after each part/sub-part
             clear()
-            # Initialize all dialogs for the next area
-            init_dialogs_01()
-            wake_up()
+            story_01 = LevelStory01(pc)
+            story_01.wake_up()
         elif choice == 2:
-            arena()
+            arena(pc)
         elif choice == 3:
+            print('''
+
+''')
+            pc.print_char_sheet()
+        elif choice == 4:
             prints_plus('Exiting game............', 0.05)
             exit()
         else:

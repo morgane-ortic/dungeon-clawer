@@ -2,7 +2,7 @@ from colorama import Fore, Style
 from utils import clear, prints, slow_text_delay
 
 def what_do():
-    input('\nWhat do you do?\n')
+    print('\nWhat do you do?\n')
 
 def wrong_choice():
     '''Default message when a wrong choice in inputed by player'''

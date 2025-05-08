@@ -11,18 +11,20 @@ def list_enemies():
         npc_names.append(npc['name'])
     return npc_names
 
-def arena():
-    pc = PC('char_sheet.json')
+def arena(pc):
     npc_names = list_enemies()
 
     while True:
         clear()
         npc_names_str = '\n'.join(npc_names)
-        enemy_choice = input(f'''ARENA MODE
-            
+        print('ARENA MODE\n')
+        sleep(1)
+        print('Loading enemies list....\n')
+        sleep(2)
+        enemy_choice = input(f'''
+{npc_names_str}  
+
 Type the name of the enemy you wish to fight:
-            
-{npc_names_str}
 
 ''')
     
