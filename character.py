@@ -34,6 +34,10 @@ class Character:
         self.cha_bns = self.abilities_bonuses['charisma']
 
         self.skills = self.char_dictionary['skills']
+        print(self.skills)
+        for key, value in self.skills.items():
+            setattr(self, key, value)
+
         self.pp = self.char_dictionary['pp']
 
         # We don't need to return any variable here, as the variables we'll need are now instance attributes

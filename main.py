@@ -12,7 +12,7 @@ what_do = 'What do you do? '
 
 def main():
     clear()       
-    story_intro()
+    # story_intro()
 
 
     pc = PC('char_sheet.json')
