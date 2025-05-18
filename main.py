@@ -7,8 +7,6 @@ from game_lines import unavailable_feature
 from story_00_intro import story_intro, main_menu
 from story_01 import LevelStory01
 
-what_do = 'What do you do? '
-
 
 def main():
     clear()       

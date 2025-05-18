@@ -50,6 +50,9 @@ def prints_plus(text, delay = 0.15):
 def printy(text, color=Fore.YELLOW):
     print(color + text + Style.RESET_ALL)
 
+def printr(text, color=Fore.RED):
+    print(color + text + Style.RESET_ALL)
+
 def print_line():
     print('')
 
@@ -71,15 +74,15 @@ def get_char_dialog(character):
 def printd(dialog_key="ERROR: DIALOG NOT FOUND", character='narrator'):
     '''Print a specific dialog line for a character'''
     dialog = get_char_dialog(character).get(dialog_key, "")
-
     prints(dialog)
 
-def print_choice(dialog_key="ERROR: DIALOG NOT FOUND", character='narrator'):
-    '''Print a specific dialog line for a character'''
-    dialog = get_char_dialog(character).get(dialog_key, "")
-
-    print(dialog)
-
+def print_choice(*dialog_keys, character='narrator'):
+    '''Print all options for a given choice'''
+    choice_number = 0
+    for key in dialog_keys:
+        choice_number += 1
+        dialog = get_char_dialog(character).get(key, "")
+        printy(f'{choice_number}. {dialog}')
 
 def clear():
     os.system('cls||clear')
