@@ -9,12 +9,22 @@
 
             "npc_stealth_10_success": "You slowly get more relaxed in the quiet night air. Sleep is coming back to you...",
 
-            "choice_back_to_bed_10": "1. Go back to bed",
+            "choice_back_to_bed_10": "Go back to bed",
 
-            "choice_back_to_bed_20": "2. Stay a bit longer at the window",
+            "choice_back_to_bed_20": "Stay a bit longer at the window",
 
             "choice_back_to_bed_yes": "You curl back against the cutie in the bed and start drifting into sleep.",
 
-            "choice_back_to_bed_no": "You stay there, humming the rich smell of the fruit trees."
+            "choice_back_to_bed_no": "You stay there, humming the rich smell of the fruit trees.",
+
+            "choice_check_window_10": "Strange! You look more attentively outside",
+
+            "choice_check_window_20": "Whatever, it's probably a deer or something",
+
+            "choice_check_window_yes": "Whatever, it's probably nothing",
+
+            "pc_per_10_success": "You see 4 silhouettes walking to the inn, trying to hide behind the trees. You catch the shine of several blades on them. Those people are NOT coming with good intent!",
+
+            "pc_per_10_fail": "You see nothing... Should you stay alert?"
         }
 }

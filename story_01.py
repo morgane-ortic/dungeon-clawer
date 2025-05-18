@@ -28,15 +28,18 @@ class LevelStory01:
         prints_plus('...', 0.5)
         printd('wake_up_010')
         printd('wake_up_020')
-        roll_per_10 = self.npc_bandit_1.roll('stealth')
-        if roll_per_10 >= self.pc.pp:
+        roll_stealth_npc_10 = self.npc_bandit_1.roll('stealth')
+        # Here the skill dice roll is checked against the pc's passive perception
+        if roll_stealth_npc_10 >= self.pc.pp:
             printd('npc_stealth_10_success')
+            self.npc_stealth_success()
         else:
             printd('npc_stealth_10_fail')
+            self.npc_stealth_fail()
 
+    def npc_stealth_success(self):
         what_do()
-        print_choice('choice_back_to_bed_10')
-        print_choice('choice_back_to_bed_20')
+        print_choice('choice_back_to_bed_10', 'choice_back_to_bed_20')
         while True:
             choice_back_to_bed = input('\n')
             print_line()
@@ -46,6 +49,35 @@ class LevelStory01:
             elif choice_back_to_bed == '2':
                 printd('choice_back_to_bed_no')
                 break
+
+    def npc_stealth_fail(self):
+        what_do()
+        print_choice('choice_check_window_10', 'choice_check_window_20')
+        while True:
+            choice_check_window = input('\n')
+            print_line()
+            if choice_check_window == '1':
+                self.check_window()
+            elif choice_check_window == '2':
+                printd('choice_back_to_bed_yes')
+                break
+
+    def check_window(self):
+        roll_per_pc_10 = self.pc.roll('perception')
+        # Here the skill dice roll is checked against the fixed Challenge Rating for this test
+        if roll_per_pc_10 >= 13:
+            printd('pc_per_10_success')
+            self.pc_per_success()
+        else:
+            printd('pc_per_10_fail')
+            self.pc_per_fail()
+
+    def pc_per_success(self):
+        pass
+
+    def pc_per_fail(self):
+        pass
+
         
         print('To be continued...')
 
