@@ -10,7 +10,7 @@ from story_01 import LevelStory01
 
 def main():
     clear()       
-    story_intro()
+    # story_intro()
 
 
     pc = PC('char_sheet.json')

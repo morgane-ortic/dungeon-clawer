@@ -153,41 +153,47 @@ class PC(Character):
             eq_shield = 'No'
 
         # Define column width
-        column_width = 30
+        column_width = 40
+        total_width = 66
         
         # print name outside of columns, on top and in the middle of screen
-        print(f'                      {Fore.RED}{self.name.upper()}{Style.RESET_ALL}')
-        print('')
+        printy(f'''     ____________________________________________________________
+()==(                                                           (@==()
+     '___________________________________________________________'|
+       |                                                          |
+       |                        {Fore.RED}{self.name.upper()}{Fore.YELLOW}                           |
+       |                                                          |{Style.RESET_ALL}''')
 
         # Prepare the character sheet content
         left_column = [
-            f'Class: {self.format_string(self.char_class)}',
-            f'Level: {self.level}',
-            f'Species: {self.format_string(self.species)}',
-            f'Experience points: {self.experience}',
-            '', # add empty lines instead of \n to not affect right column formatting
-            f'Armor Class: {self.ac}',
-            f'Hit Points: {self.hp}',
-            f'Proficiency: {self.proficiency}',
-            f'Passive Perception: {self.pp}',
-            '',
-            'Abilities:'
+            f'       |  Class: {self.format_string(self.char_class)}',
+            f'       |  Level: {self.level}',
+            f'       |  Species: {self.format_string(self.species)}',
+            f'       |  Experience points: {self.experience}',
+            '       |  ', # add empty lines instead of \n to not affect right column formatting
+            f'       |  Armor Class: {self.ac}',
+            f'       |  Hit Points: {self.hp}',
+            f'       |  Proficiency: {self.proficiency}',
+            f'       |  Passive Perception: {self.pp}',
+            '       |',
+            '       |  Abilities:'
         ]
 
         for ability, value in self.abilities.items():
             formatted_ability = self.format_string(ability)
-            left_column.append(f'    {formatted_ability}: {value} ({self.abilities_bonuses[ability]})')
+            left_column.append(f'       |      {formatted_ability}: {value} ({self.abilities_bonuses[ability]})')
 
-        left_column.extend(['', 'Save Bonuses:'])
+        left_column.extend(['       |  ', '       |  Save Bonuses:'])
 
         for ability, value in self.save_bonuses.items():
             formatted_ability = self.format_string(ability)
-            left_column.append(f'    {formatted_ability}: {value}')
+            left_column.append(f'       |      {formatted_ability}: {value}')
 
         left_column.extend([
-            f'\nWeapon: {self.format_string(self.eq_weapon)}',
-            f'Armor: {self.format_string(self.eq_armor)}',
-            f'Shield: {eq_shield}'
+            f'       |  ',
+            f'       |  Weapon: {self.format_string(self.eq_weapon)}',
+            f'       |  Armor: {self.format_string(self.eq_armor)}',
+            f'       |  Shield: {eq_shield}'
         ])
 
         right_column = ['Skills:']
@@ -201,7 +207,11 @@ class PC(Character):
         for i in range(max_lines):
             left_text = left_column[i] if i < len(left_column) else ''
             right_text = right_column[i] if i < len(right_column) else ''
-            print(f'{left_text:<{column_width}} {right_text}')
+            line_content = (f'{left_text:<{column_width}} {right_text}')
+            printy(f'{line_content:<{total_width}}|')
+        printy(f'''     __)__________________________________________________________|
+()==(                                                            (@==()
+     '-----------------------------------------------------------\'''')
 
     def atk_roll(self, target):
         '''PC rolls for attack to know whether they hit'''
