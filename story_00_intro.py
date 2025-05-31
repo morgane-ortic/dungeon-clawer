@@ -22,5 +22,5 @@ def main_menu():
     for index, choice in enumerate(main_menu_choices):
         print(f'{index + 1}. {choice}')
 
-    menu_choice = int(input('Enter your choice: '))
+    menu_choice = input('Enter your choice: ')
     return menu_choice

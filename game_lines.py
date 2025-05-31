@@ -1,6 +1,12 @@
 from colorama import Fore, Style
 from utils import clear, prints, slow_text_delay
 
+def press_continue():
+    input('PRESS ENTER TO CONTINUE...')
+
+def press_go_back():
+    input('PRESS ENTER TO GO BACK...')
+
 def what_do():
     print('\nWhat do you do?\n')
 

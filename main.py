@@ -1,6 +1,6 @@
 from time import sleep
 from arena import arena
-from utils import clear, prints, prints_plus
+from utils import clear, prints, prints_plus, printy
 from character import PC, NPC
 from combat import combat
 from game_lines import unavailable_feature
@@ -18,23 +18,26 @@ def main():
 
     while True:
         choice = main_menu()
-        if choice == 1:
+        if choice == '1':
             # clear the terminal after each part/sub-part
             clear()
             story_01 = LevelStory01(pc)
             story_01.wake_up()
-        elif choice == 2:
+        elif choice == '2':
+            clear()
             arena(pc)
-        elif choice == 3:
-            print('''
-
-''')
+        elif choice == '3':
+            clear()
+            print('\n                            CHARACTER SHEET')
             pc.print_char_sheet()
-        elif choice == 4:
+            clear()
+        elif choice == '4':
             prints_plus('Exiting game............', 0.05)
             exit()
         else:
-            prints('Invalid choice. Please try again.\n')
+            clear()
+            sleep(0.2)
+            printy('\nInvalid choice. Please try again.\n')
 
 
 

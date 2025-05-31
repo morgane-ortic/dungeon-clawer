@@ -1,6 +1,7 @@
 import re
 from time import sleep
 from colorama import Fore, Style
+from game_lines import press_go_back
 from utils import prints_auto, printy, read_json_file, roll_dice, sleep
 
 class Character:
@@ -211,7 +212,9 @@ class PC(Character):
             printy(f'{line_content:<{total_width}}|')
         printy(f'''     __)__________________________________________________________|
 ()==(                                                            (@==()
-     '-----------------------------------------------------------\'''')
+     '-----------------------------------------------------------\'
+''')
+        press_go_back()
 
     def atk_roll(self, target):
         '''PC rolls for attack to know whether they hit'''
