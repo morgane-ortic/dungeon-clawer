@@ -81,6 +81,6 @@ class LevelStory01:
         
         print('To be continued...')
 
-    def combat_1():
+    def combat_1(self):
         #this will be a new chapter inside the level
         pass

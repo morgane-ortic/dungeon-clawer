@@ -76,13 +76,10 @@ def printd(dialog_key="ERROR: DIALOG NOT FOUND", character='narrator'):
     dialog = get_char_dialog(character).get(dialog_key, "")
     prints(dialog)
 
-def print_choice(*dialog_keys, character='narrator'):
-    '''Print all options for a given choice'''
-    choice_number = 0
-    for key in dialog_keys:
-        choice_number += 1
-        dialog = get_char_dialog(character).get(key, "")
-        printy(f'{choice_number}. {dialog}')
+def print_choice(dialog_key="ERROR: DIALOG NOT FOUND", character='narrator'):
+    '''Print a specific dialog line for a character'''
+    dialog = get_char_dialog(character).get(dialog_key, "")
+    printy(dialog)
 
 def clear():
     os.system('cls||clear')
